@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-12">
+        <h1>
+            Listado Actividades
+        </h1>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Fecha Creación</th>
+                    <th>Usuario</th>
+                    <th>Actividad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of lista">
+                    <td>{{item.FechaCreacion | date : 'dd/MM/yyyy'}}</td>
+                    <td>{{item.Usuario.Nombre +' '+ item.Usuario.Apellido}}</td>
+                    <td>{{item.Detalle}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
