@@ -17,7 +17,7 @@ namespace Domain
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Apellido { get; set; }
-        public decimal? Telefono { get; set; }
+        public string Telefono { get; set; }
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [EmailAddress(ErrorMessage = "El campo {0} debe se un email vlido")]
         public string CorreoElectronico { get; set; }

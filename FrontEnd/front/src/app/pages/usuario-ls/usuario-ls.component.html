@@ -50,24 +50,32 @@
                 <h5 class="modal-title">Usuario</h5>
             </div>
             <div class="modal-body">
-                <form class="formulario" [formGroup]="form">
+                <form class="formulario" autocomplete="off" [formGroup]="form">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <label>Nombre</label>
                             <div>
-                                <input class="form-control" type="text"  maxlength="250" formControlName="Nombre" />
+                                <input class="form-control" type="text"  maxlength="50" appSoloTexto formControlName="Nombre" />
+                            </div>
+                            <div *ngIf="form.get('Nombre').errors?.required && form.get('Nombre').touched" class="form-control-feedback">El campo es obligatorio
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <label>Apellido</label>
                             <div>
-                                <input class="form-control" type="text"  maxlength="250" formControlName="Apellido" />
+                                <input class="form-control" type="text"  maxlength="50" appSoloTexto formControlName="Apellido" />
+                            </div>
+                            <div *ngIf="form.get('Apellido').errors?.required && form.get('Apellido').touched" class="form-control-feedback">El campo es obligatorio
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <label>Telefono</label>
                             <div>
-                                <input class="form-control" type="number"  formControlName="Telefono" />
+                                <input class="form-control" type="text" appSoloNumeros formControlName="Telefono" />
+                            </div>
+                            <div *ngIf="form.get('Telefono').errors?.minlength && form.get('Telefono').touched" class="form-control-feedback">El campo debe tener mínimo 7 dígitos
+                            </div>
+                            <div *ngIf="form.get('Telefono').errors?.maxlength && form.get('Telefono').touched" class="form-control-feedback">El campo debe tener máximo 15 dígitos
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
@@ -75,20 +83,26 @@
                             <div>
                                 <input class="form-control" type="text"  maxlength="500" formControlName="CorreoElectronico" />
                             </div>
+                            <div *ngIf="form.get('CorreoElectronico').errors?.required && form.get('CorreoElectronico').touched" class="form-control-feedback">El campo es obligatorio
+                            </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <label>Fecha Nacimiento</label>
                             <div>
                                 <input class="form-control" type="date"  formControlName="FechaNacimiento" />
                             </div>
+                            <div *ngIf="form.get('FechaNacimiento').errors?.required && form.get('FechaNacimiento').touched" class="form-control-feedback">El campo es obligatorio
+                            </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <label>País</label>
                             <div>
                                 <select formControlName="CodigoPais" class="form-control">
-                                    <option value="0">-- Seleccione --</option>
+                                    <option value="">-- Seleccione --</option>
                                     <option [value]="item.alpha3Code" *ngFor="let item of listaPaises">{{item.name}}</option>
                                 </select>
+                            </div>
+                            <div *ngIf="form.get('CodigoPais').errors?.required && form.get('CodigoPais').touched" class="form-control-feedback">El campo es obligatorio
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
@@ -111,7 +125,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button  type="button" (click)="guardar()" class="btn btn-primary"><i class="far fa-check-square"></i>Guardar</button>
+                <button  
+                [disabled]="this.form.invalid"
+                type="button" (click)="guardar()" class="btn btn-primary"><i class="far fa-check-square"></i>Guardar</button>
                             <button id="btnCerrarModal" data-bs-dismiss="modal" class="btn btn-danger"><i
                                     class="fas fa-times"></i>Cancelar</button>
               </div>

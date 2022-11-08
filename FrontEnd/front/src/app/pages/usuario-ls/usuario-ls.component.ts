@@ -37,7 +37,7 @@ export class UsuarioLsComponent implements OnInit {
       Nombre: new FormControl('',[Validators.required]),
         Apellido: new FormControl('',[Validators.required]),
         CodigoPais: new FormControl(0,[Validators.required]),
-        Telefono: new FormControl(''),
+        Telefono: new FormControl('',[Validators.minLength(7),Validators.maxLength(15)]),
         CorreoElectronico: new FormControl('',[Validators.required, Validators.email]),
         DeseaContacto: new FormControl(false,[Validators.required]),
         FechaNacimiento: new FormControl('',[Validators.required]),
@@ -109,7 +109,7 @@ export class UsuarioLsComponent implements OnInit {
         Nombre:'',
         Apellido: '',
         Telefono: '',
-        CodigoPais: 0,
+        CodigoPais: '',
         CorreoElectronico: '',
         DeseaContacto: false,
         FechaNacimiento: ''
@@ -118,8 +118,6 @@ export class UsuarioLsComponent implements OnInit {
   }
 
   guardar(){
-    console.log(this.form);
-    
     if(this.form.valid){
 
       if(this.form.value.IdUsuario == 0){
@@ -129,6 +127,7 @@ export class UsuarioLsComponent implements OnInit {
           if(res.Codigo == 0){
             document.getElementById("btnCerrarModal").click();
             alert(res.Respuesta);
+            this.form.markAsUntouched()
             this.obtenerUsuarios();
           }
           else{
